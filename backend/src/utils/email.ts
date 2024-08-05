@@ -24,6 +24,7 @@ const sendEmail = async (
       subject: subject,
       text: text,
     });
+    
     console.log("message sent: %s", emailSent.messageId);
   } catch (error) {
     const err = new ProjectError("email not sent");
