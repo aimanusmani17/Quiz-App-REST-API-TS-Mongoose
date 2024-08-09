@@ -62,3 +62,5 @@ dist
 .tern-port
 
 what.txt
+
+.node_modules
