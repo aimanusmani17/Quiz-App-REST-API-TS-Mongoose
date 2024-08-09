@@ -1,13 +1,13 @@
 {
   "env": {
-    "CONNECTION_STRING": "<DATABASE_CONNECTION_STRING>",
+    "CONNECTION_STRING": "mongodb+srv://myuser:abcd@mycluster.twqc0pp.mongodb.net/quizAppData?retryWrites=true&w=majority&appName=mycluster",
     "PORT": 3002,
     "SECRET_KEY": "<ENCRYPTION_SECRET>",
-    "USER": "<USER_EMAIL>",
-    "PASS": "<USER_PASSWORD>",
-    "HOST": "<SERVICE_PROVIDER>",
-    "BASE_URL": "<SERVER_BASE_URL>",
-    "CORS_ORIGIN_URL":"<CLIENT_BASE_URL>"
+    "USER": "aimanusmani.campk12@gmail.com",
+    "PASS": "asii axay qofe mqnp",
+    "HOST": "smtp.gmail.com",
+    "BASE_URL": "localhost:3002",
+    "CORS_ORIGIN_URL":"localhost:3000"
   },
   "watch": ["src"],
   "ext": "ts,json",
