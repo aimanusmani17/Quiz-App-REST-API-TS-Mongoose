@@ -6,6 +6,7 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Home from './components/Home';
 import CreateQuiz from './components/CreateQuiz';
+import OtpVerify from './components/OtpVerify';
 
 function App() {
 
@@ -26,6 +27,10 @@ function App() {
       path: "/create-quiz",
       element: <CreateQuiz />,
     },
+    {
+      path: "/otp",
+      element: <OtpVerify />,
+    }
   ]);
   return <RouterProvider router={router} />
     
