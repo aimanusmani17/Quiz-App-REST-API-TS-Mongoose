@@ -1,11 +1,13 @@
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import RegisterStyles from "../styles/Register.module.css";
 import quizImage from "../assets/quizImg/quiz.jpg";
 
 const Register = () => {
   const navigate = useNavigate();
+  const [isDisabled, setIsDisabled] = useState(true); // initial value is true
+  const [isFormComplete, setIsFormComplete] = useState(false);
 
   const [values, setValues] = useState({
     name: "",
@@ -16,6 +18,18 @@ const Register = () => {
 
   const [submitted, setSubmitted] = useState(false);
   const [valid, setValid] = useState(false);
+
+  // Enable/Disable submit button based on form completion
+  useEffect(() => {
+    const allFieldsFilled =
+      values.name &&
+      values.email &&
+      values.password &&
+      values.confrimPassword &&
+      values.password === values.confrimPassword;
+
+    setIsDisabled(!allFieldsFilled);
+  }, [values]);
 
   const handleInputChange = (event) => {
     event.preventDefault();
@@ -38,11 +52,14 @@ const Register = () => {
     setValid(isValid);
     setSubmitted(true);
 
+    
+
     if (isValid) {
       // Optional: Navigate if form is valid
       navigate("/otp");
     }
-  };
+  }
+
 
   return (
     <>
@@ -110,6 +127,7 @@ const Register = () => {
               <div className={RegisterStyles.btnContainer}>
                 <button
                   className={RegisterStyles.Regbutton}
+                  disabled={isDisabled}
                   type="submit"
                   onClick={() => navigate("/otp")}
                 >
