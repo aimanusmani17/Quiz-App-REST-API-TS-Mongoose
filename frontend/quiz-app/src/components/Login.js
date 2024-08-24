@@ -1,10 +1,20 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginStyles from "../styles/Login.module.css";
 import quizImage from "../assets/quizImg/quizlogin.webp";
+import axios from "axios";
 
 const Login = () => {
   const navigate = useNavigate();
+
+  // useEffect(() => {
+  //   axios
+  //   .get("https://localhost:3002/")
+  //   .then((res) => console.log(res))
+  //   .catch((err) => console.log(err));
+   
+  
+  // }, [])
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -13,7 +23,7 @@ const Login = () => {
   const [valid, setValid] = useState(false);
 
   const handleInputChange = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     const { name, value } = event.target;
     setValues((prevValues) => ({
       ...prevValues,
@@ -48,6 +58,7 @@ const Login = () => {
                 className={LoginStyles.formField}
                 type="text"
                 placeholder="Enter email id"
+                autoComplete="off"
                 name="email"
                 value={values.email}
                 onChange={handleInputChange}
@@ -59,7 +70,7 @@ const Login = () => {
               <label htmlFor="name">Password: </label>
               <input
                 className={LoginStyles.formField}
-                type="text"
+                type="password"
                 placeholder="Enter your password"
                 name="password"
                 value={values.password}

@@ -1,11 +1,12 @@
-
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import RegisterStyles from "../styles/Register.module.css";
 import quizImage from "../assets/quizImg/quiz.jpg";
+import axios from "axios";
 
 const Register = () => {
   const navigate = useNavigate();
+
   const [isDisabled, setIsDisabled] = useState(true); // initial value is true
   const [isFormComplete, setIsFormComplete] = useState(false);
 
@@ -13,7 +14,7 @@ const Register = () => {
     name: "",
     email: "",
     password: "",
-    confrimPassword: "",
+    confirmPassword: "",
   });
 
   const [submitted, setSubmitted] = useState(false);
@@ -25,14 +26,14 @@ const Register = () => {
       values.name &&
       values.email &&
       values.password &&
-      values.confrimPassword &&
-      values.password === values.confrimPassword;
+      values.confirmPassword &&
+      values.password === values.confirmPassword;
 
     setIsDisabled(!allFieldsFilled);
   }, [values]);
 
   const handleInputChange = (event) => {
-    event.preventDefault();
+    // event.preventDefault();
     const { name, value } = event.target;
     setValues((prevValues) => ({
       ...prevValues,
@@ -40,26 +41,25 @@ const Register = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const isValid =
-      values.name &&
-      values.email &&
-      values.password &&
-      values.confrimPassword &&
-      values.password === values.confrimPassword;
-
-    setValid(isValid);
-    setSubmitted(true);
-
+  const handleSubmit = (event) => {
+    event.preventDefault();
     
 
-    if (isValid) {
-      // Optional: Navigate if form is valid
-      navigate("/otp");
-    }
-  }
+    const data = {
+      name: values.name,
+      email: values.email,
+      password: values.password,
+      confirmPassword: values.confirmPassword,
+    };
+   
+    axios
+      .post("http://localhost:3002/auth", data)
+      .then((res) => {console.log(res.data.data.token)
+        navigate('/otp');
+      })
+      .catch((err) => console.log(err));
 
+  };
 
   return (
     <>
@@ -71,7 +71,10 @@ const Register = () => {
           </div>
           <div className={RegisterStyles.form}>
             <h1 className={RegisterStyles.headingTwo}>Register Here</h1>
-            <form className={RegisterStyles.registerForm} onSubmit={handleSubmit}>
+            <form
+              className={RegisterStyles.registerForm}
+              onSubmit={handleSubmit}
+            >
               {submitted && valid && (
                 <div className={RegisterStyles.successMessage}>
                   <h3>Welcome {values.name}</h3>
@@ -83,7 +86,9 @@ const Register = () => {
                 className={RegisterStyles.formField}
                 type="text"
                 placeholder="Enter Name"
+                autoComplete="off"
                 name="name"
+                required
                 value={values.name}
                 onChange={handleInputChange}
               />
@@ -116,8 +121,8 @@ const Register = () => {
                 className={RegisterStyles.formField}
                 type="password"
                 placeholder="Confirm Password"
-                name="confrimPassword"
-                value={values.confrimPassword}
+                name="confirmPassword"
+                value={values.confirmPassword}
                 onChange={handleInputChange}
               />
               {submitted && values.password !== values.confrimPassword && (
@@ -129,7 +134,7 @@ const Register = () => {
                   className={RegisterStyles.Regbutton}
                   disabled={isDisabled}
                   type="submit"
-                  onClick={() => navigate("/otp")}
+                  onClick={handleSubmit}
                 >
                   Submit
                 </button>

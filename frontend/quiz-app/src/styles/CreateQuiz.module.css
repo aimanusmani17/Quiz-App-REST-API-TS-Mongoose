@@ -1,6 +1,6 @@
 .main{
     background-color: #2b71a4;
-    height: 100vh;
+    height: 80vw;
     
 }
 
@@ -14,18 +14,18 @@
 }
 .pageContent {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-items: center;
-    margin: 3rem auto;
+    /* margin: 3rem auto; */
   }
 
 .imageContainer{
     >img{
       border-radius: 50%;
-      margin: 10px 50px 50px 100p;
-      position: fixed;
-      top: 78px;
-      left: 73px;
+      /* margin: 10px 50px 50px 100p; */
+      position: relative;
+      /* top: 78px; */
+      left: 10rem;
     }
   }
 
@@ -35,21 +35,15 @@
     padding: 10px;
     border-radius: 24px;
     background-color: #419fd3;
-    position: fixed;
-    top: 80px;
+    position: relative;
+    /* top: 80px; */
     right: 200px;
-    
-   
-
-
   }
 .quizForm{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     padding: 10px;
-  
-
 }
 .btn{
     background-color: #a6e2e2; /* Background color */
@@ -66,9 +60,22 @@
 }
 
 .questionCard{
-    width: 360px;
+    width: 500px;
     box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
    
     border-radius: 24px;
     background-color: #A9D8F2;
+    margin: 0 auto;
+    
 }
+.questionaire{
+  padding: 2rem 1rem ;
+}
+
+.inputField{
+  display: flex;
+    align-items: center;
+    justify-content: normal;
+    gap: 1rem;
+}
+

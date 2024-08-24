@@ -11,13 +11,14 @@ import { RequestHandler } from "express";
 // Define a function to send emails
 
 async function sendEmailOTPRegister(email: string) {
-    
+   
     try {
         let resp: ReturnResponse;
         // check if user already present
         // Find user with provided email
         const checkUserPresent = await User.findOne({ email });
         // to be used in case of sign up
+       
 
         // if user found then return a error response
         if (checkUserPresent && checkUserPresent.isVerified) {
@@ -33,8 +34,9 @@ async function sendEmailOTPRegister(email: string) {
             lowerCaseAlphabets: false,
             specialChars: false
         })
-
+        
         const result = await OTP.findOne({ otp: otp });
+        
         // when result find then change the otp always unique otp store in database
         while (result) {
             otp = otpGenerator.generate(6, {
@@ -48,7 +50,7 @@ async function sendEmailOTPRegister(email: string) {
             "Verification Registration Email OTP ",
             `Registration OTP is ${otp}`
         );
-
+console.log(mailResponse);
         const saveOTP = new OTP({ email, otp });
         const saveResult = await saveOTP.save();
         

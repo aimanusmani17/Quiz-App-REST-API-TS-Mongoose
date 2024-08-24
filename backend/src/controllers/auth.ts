@@ -32,6 +32,7 @@ const registerUser: RequestHandler = async (req, res, next) => {
     const token = jwt.sign({ email: email }, secretKey);
     // send email otp for registration
     const sendOtp = await sendEmailOTPRegister(email);
+    // console.log(sendOtp);
     // if email send successfull
     if (sendOtp) {
       // check user already present in User DataBase or not

@@ -1,10 +1,22 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import QuizStyles from "../styles/CreateQuiz.module.css";
 import quizImage from "../assets/quizImg/quiz create.png";
+import axios from "axios";
 
 const CreateQuiz = () => {
   const navigate = useNavigate();
+  // useEffect(() => {
+  //   axios
+  //   .get("https://localhost:3002/")
+  //   .then((res) => console.log(res))
+  //   .catch((err) => console.log(err));
+   
+  
+  // }, [])
+  
+  
+
   const [values, setValues] = useState({
     name: "",
     category: "",
@@ -15,7 +27,7 @@ const CreateQuiz = () => {
   const [valid, setValid] = useState(false);
 
   const handleInputChange = (event) => {
-    event.preventDefault();
+    
     const { name, value } = event.target;
     setValues((prevValues) => ({
       ...prevValues,
@@ -99,12 +111,78 @@ const CreateQuiz = () => {
             </form>
           </div>
 
-          <div className={QuizStyles.questionCard}>
+         
+        </div>
+        <div className={QuizStyles.questionCard}>
             <form>
+              <div className={QuizStyles.questionaire}>
+                <div className={QuizStyles.inputField}>
+                  <div>
+                <label>Ques: 1</label>
+                </div>
+                {/* <input
+                  className={QuizStyles.formField}
+                  type="number"
+                  placeholder="00"
+                  name="number"
+                  value={values.number}
+                  onChange={handleInputChange}
+                /> */}
+                <div>
+                 {/* <label>Question:</label> */}
+                <input
+                  className={QuizStyles.formField}
+                  type="text"
+                  placeholder="Write your question here"
+                  name="text"
+                  value={values.name}
+                  onChange={handleInputChange}
+                />
+                </div>
               
+
+              </div>
+               
+                <label>1.</label>
+                <input
+                  className={QuizStyles.formField}
+                  type="text"
+                  placeholder="option 1"
+                  name="text"
+                  value={values.name}
+                  onChange={handleInputChange}
+                />
+                <label>2.</label>
+                <input
+                  className={QuizStyles.formField}
+                  type="text"
+                  placeholder="option 2"
+                  name="text"
+                  value={values.name}
+                  onChange={handleInputChange}
+                />
+                <label>3.</label>
+                <input
+                  className={QuizStyles.formField}
+                  type="text"
+                  placeholder="option 3"
+                  name="text"
+                  value={values.name}
+                  onChange={handleInputChange}
+                />
+                <label>4.</label>
+                <input
+                  className={QuizStyles.formField}
+                  type="text"
+                  placeholder="option 4"
+                  name="text"
+                  value={values.name}
+                  onChange={handleInputChange}
+                />
+              </div>
             </form>
           </div>
-        </div>
+
       </div>
     </>
   );

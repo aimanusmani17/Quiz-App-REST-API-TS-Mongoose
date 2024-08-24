@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import OtpStyles from "../styles/Otp.module.css";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const OtpVerify = () => {
   const navigate = useNavigate();
+  const [isDisabled, setIsDisabled] = useState(true);
 
   const [values, setValues] = useState({
     otp: "",
@@ -13,7 +15,6 @@ const OtpVerify = () => {
   const [submitted, setSubmitted] = useState(false);
 
   const handleInputChange = (event) => {
-    event.preventDefault();
     const { name, value } = event.target;
     setValues((prevValues) => ({
       ...prevValues,
@@ -23,15 +24,16 @@ const OtpVerify = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const isValid = values.otp;
-
-    setValid(isValid);
-    setSubmitted(true);
-
-    if (isValid) {
-      // Optional: Navigate if form is valid
-      navigate("/login");
-    }
+    const isValid = {
+      otp: values.otp,
+    };
+    axios
+      .post("https://localhost:3002/auth/verify-registration-otp", isValid)
+      .then((res) => {
+        console.log(res);
+        navigate("/login");
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -59,8 +61,9 @@ const OtpVerify = () => {
             <div className={OtpStyles.btn}>
               <button
                 className={OtpStyles.btn}
+                disabled={isDisabled}
                 type="submit"
-                onClick={() => navigate("")}
+                onClick={handleSubmit}
               >
                 Submit
               </button>

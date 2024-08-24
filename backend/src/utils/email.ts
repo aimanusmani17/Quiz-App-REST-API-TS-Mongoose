@@ -7,6 +7,7 @@ const sendEmail = async (
   subject: string,
   text: string
 ): Promise<any> => {
+ 
   try {
     const transporter = nodemailer.createTransport({
       host: process.env.HOST,
@@ -17,6 +18,7 @@ const sendEmail = async (
         pass: process.env.PASS,
       },
     });
+   
 
     const emailSent = await transporter.sendMail({
       from: process.env.USER,

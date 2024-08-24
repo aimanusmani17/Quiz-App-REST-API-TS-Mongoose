@@ -4,7 +4,7 @@
     "PORT": 3002,
     "SECRET_KEY": "<ENCRYPTION_SECRET>",
     "USER": "aimanusmani.campk12@gmail.com",
-    "PASS": "asii axay qofe mqnp",
+    "PASS": "javh wypo oqwn vrmd",
     "HOST": "smtp.gmail.com",
     "BASE_URL": "localhost:3002",
     "CORS_ORIGIN_URL":"localhost:3000"
