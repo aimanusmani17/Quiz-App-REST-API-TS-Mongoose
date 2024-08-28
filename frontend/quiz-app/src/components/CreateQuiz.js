@@ -70,27 +70,34 @@ const CreateQuiz = () => {
               )}
 
               <label htmlFor="name">Category: </label>
-              <input
+             
+              {/* <input
                 className={QuizStyles.formField}
                 type="text"
                 placeholder="Quiz category"
                 name="category"
                 value={values.category}
                 onChange={handleInputChange}
-              />
+              /> */}
               {submitted && !values.email && (
                 <span id="name-error">Please enter quiz category</span>
               )}
 
               <label htmlFor="name">Level: </label>
-              <input
+              <select  value={values.level} onChange={handleInputChange}>
+             
+             <option  value="option1">Easy</option>
+             <option  value="option2">Medium</option>
+             <option  value="option3">Difficult</option>
+         </select>
+              {/* <input
                 className={QuizStyles.formField}
                 type="text"
                 placeholder="Quiz category"
                 name="level"
                 value={values.level}
                 onChange={handleInputChange}
-              />
+              /> */}
               {submitted && !values.email && (
                 <span id="name-error">Enter quiz level:</span>
               )}
@@ -131,7 +138,7 @@ const CreateQuiz = () => {
                 <div>
                  {/* <label>Question:</label> */}
                 <input
-                  className={QuizStyles.formField}
+                  className={QuizStyles.quesField}
                   type="text"
                   placeholder="Write your question here"
                   name="text"
@@ -142,6 +149,8 @@ const CreateQuiz = () => {
               
 
               </div>
+
+              <div className={QuizStyles.optionRowOne}>
                
                 <label>1.</label>
                 <input
@@ -161,6 +170,9 @@ const CreateQuiz = () => {
                   value={values.name}
                   onChange={handleInputChange}
                 />
+                </div>
+
+                <div className={QuizStyles.optionRowOne}>
                 <label>3.</label>
                 <input
                   className={QuizStyles.formField}
@@ -179,6 +191,7 @@ const CreateQuiz = () => {
                   value={values.name}
                   onChange={handleInputChange}
                 />
+                </div>
               </div>
             </form>
           </div>
