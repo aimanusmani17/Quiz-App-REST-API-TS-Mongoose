@@ -64,7 +64,7 @@ const Register = () => {
   return (
     <>
       <div className={RegisterStyles.main}>
-        <h1 className={RegisterStyles.heading}>Quiz App</h1>
+        <h1 className={RegisterStyles.heading}>Quizzfy</h1>
         <div className={RegisterStyles.pageContent}>
           <div className={RegisterStyles.imageContainer}>
             <img src={quizImage} width={400} height={400} alt="Quiz" />

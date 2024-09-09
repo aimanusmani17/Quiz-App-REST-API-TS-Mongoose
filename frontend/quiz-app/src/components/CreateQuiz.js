@@ -1,47 +1,356 @@
-import React, { useState,useEffect } from "react";
+// import React, { useState } from "react";
+// import { useNavigate } from "react-router-dom";
+// import QuizStyles from "../styles/CreateQuiz.module.css";
+
+// const CreateQuiz = () => {
+//   const navigate = useNavigate();
+
+//   const [values, setValues] = useState({
+//     name: "",
+//     category: "",
+//     level: "",
+//     privacy: "",
+//     allowedUser: "",
+//     passPercent: "",
+//   });
+
+//   const [submitted, setSubmitted] = useState(false);
+//   const [valid, setValid] = useState(false);
+//   const [quesList, setQuesList] = useState([{ question: "" }]);
+//   const [optionList, setOptionList] = useState([{ option: "" }]);
+
+//   const handleAddQues = () => {
+//     setQuesList([...quesList, { question: "" }]);
+//   };
+
+//   const handleRemoveQues = (index) => {
+//     const qList = [...quesList];
+//     qList.splice(index, 1);
+//     setQuesList(qList);
+//   };
+
+//   // const handleAddOption = () => {
+//   //   setOptionList([...optionList, { option: " " }]);
+//   // };
+
+//   const handleOptionChange = (e, qIndex, oIndex) => {
+//     const { value } = e.target;
+//     const updatedOptionList = [...optionList];
+//     updatedOptionList[qIndex].options[oIndex].option = value;
+//     setOptionList(updatedOptionList);
+//   };
+
+//   const handleAddOption = (oIndex) => {
+//     const updatedOptionList = [...optionList];
+//     if (updatedOptionList[oIndex].options.length < 4) {
+//       updatedOptionList[oIndex].options.push({ option: "" });
+//       setOptionList(updatedOptionList);
+//     }
+//   };
+
+
+
+//   const handleRemoveOption = (index) => {
+//     const list = [...optionList];
+//     list.splice(index, 1);
+//     setOptionList(list);
+//   };
+
+//   const handleInputChange = (event) => {
+//     const { name, value } = event.target;
+//     setValues((prevValues) => ({
+//       ...prevValues,
+//       [name]: value,
+//     }));
+//   };
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     setSubmitted(true);
+
+//     // Validate form fields
+//     if (
+//       values.name &&
+//       values.category &&
+//       values.level &&
+//       values.privacy &&
+//       values.allowedUser &&
+//       values.passPercent
+//     ) {
+//       setValid(true);
+//       // Proceed with the logic, like navigating or showing questions
+//       // navigate("/create-quiz"); // Optional navigation
+//     } else {
+//       setValid(false);
+//     }
+//   };
+
+//   return (
+//     <>
+//       <div className={QuizStyles.main}>
+//         <h1 className={QuizStyles.heading}>Create Quiz</h1>
+
+//         <div className={QuizStyles.pageContent}>
+//           <div className={QuizStyles.pageHeader}>
+//             <div className={QuizStyles.formCard}>
+//               <form className={QuizStyles.quizForm} onSubmit={handleSubmit}>
+//                 <label htmlFor="name">Quiz Name: </label>
+//                 <input
+//                   className={QuizStyles.formField}
+//                   type="text"
+//                   placeholder="Enter quiz name"
+//                   name="name"
+//                   required
+//                   value={values.name}
+//                   onChange={handleInputChange}
+//                 />
+//                 {submitted && !values.name && (
+//                   <span id="name-error">Please enter quiz name</span>
+//                 )}
+
+//                 <label htmlFor="category">Category: </label>
+//                 <select
+//                   name="category"
+//                   value={values.category}
+//                   onChange={handleInputChange}
+//                 >
+//                   <option value="">Choose Option</option>
+//                   <option value="option1">Exam</option>
+//                   <option value="option2">Test</option>
+//                   <option value="option3">Difficult</option>
+//                 </select>
+//                 {submitted && !values.category && (
+//                   <span id="category-error">Please enter quiz category</span>
+//                 )}
+
+//                 <label htmlFor="level">Level: </label>
+//                 <select
+//                   name="level"
+//                   value={values.level}
+//                   onChange={handleInputChange}
+//                 >
+//                   <option value="">Choose Option</option>
+//                   <option value="option1">Easy</option>
+//                   <option value="option2">Medium</option>
+//                   <option value="option3">Difficult</option>
+//                 </select>
+//                 {submitted && !values.level && (
+//                   <span id="level-error">Enter quiz level:</span>
+//                 )}
+
+//                 <label htmlFor="privacy">Privacy: </label>
+//                 <select
+//                   name="privacy"
+//                   value={values.privacy}
+//                   onChange={handleInputChange}
+//                 >
+//                   <option value="">Choose Option</option>
+//                   <option value="private">Private</option>
+//                   <option value="public">Public</option>
+//                 </select>
+//                 {submitted && !values.privacy && (
+//                   <span id="privacy-error">Enter quiz privacy:</span>
+//                 )}
+
+//                 <label htmlFor="passPercent">Passing Percentage: </label>
+//                 <input
+//                   className={QuizStyles.formField}
+//                   type="text"
+//                   placeholder="Enter your passing percentage"
+//                   name="passPercent"
+//                   required
+//                   value={values.passPercent}
+//                   onChange={handleInputChange}
+//                 />
+//                 {submitted && !values.passPercent && (
+//                   <span id="passPercent-error">
+//                     Enter the passing percentage:
+//                   </span>
+//                 )}
+
+//                 <label htmlFor="allowedUser">Number of Allowed Users: </label>
+//                 <input
+//                   className={QuizStyles.formField}
+//                   type="text"
+//                   placeholder="Enter number of allowed users"
+//                   name="allowedUser"
+//                   required
+//                   value={values.allowedUser}
+//                   onChange={handleInputChange}
+//                 />
+//                 {submitted && !values.allowedUser && (
+//                   <span id="allowedUser-error">
+//                     Enter the number of allowed users:
+//                   </span>
+//                 )}
+
+//                 <button type="submit" className={QuizStyles.btn}>
+//                   Create
+//                 </button>
+//               </form>
+//             </div>
+
+//             {/* Render quesList only if form is valid */}
+//             {valid &&
+//               quesList.map((x, index) => (<>
+//                 <div key={index} className={QuizStyles.questionCard}>
+//                   <form>
+//                     <div className={QuizStyles.questionaire}>
+//                       <div className={QuizStyles.inputField}>
+//                         <div>
+//                           <label>Question. {index + 1}</label>
+//                         </div>
+
+//                         <div>
+//                           <input
+//                             type="text"
+//                             className={QuizStyles.quesField}
+//                             placeholder="Write your question here"
+//                             name="text"
+//                             required
+//                             onChange={handleInputChange}
+//                           />
+//                         </div>
+//                       </div>
+//                       {/* Give Options */}
+//                       {optionList.map((x, oindex) => (
+//                         <div>
+//                         <div key={index} className={QuizStyles.options}>
+//                           <input
+//                             className={QuizStyles.options}
+//                             type="text"
+//                             placeholder={`Option ${oindex + 1}`}
+//                             name="text"
+//                             onChange={handleInputChange}
+//                           />
+
+                         
+//                           {optionList.length !== 1 && (
+//                             <button
+//                               type="button"
+//                               className={QuizStyles.rmvBtn}
+//                               onClick={() => handleRemoveOption(oindex)}
+//                             >
+//                               Remove
+//                             </button>
+//                           )}
+//                         </div>
+//                          {optionList.length - 1 === index &&
+//                           optionList.length < 4 && (
+//                             <button
+//                               type="button"
+//                               className={QuizStyles.addBtn}
+//                               // onClick={handleAddOption}
+//                               onClick={() => handleAddOption(oindex)}
+//                             >
+//                               Add Options
+//                             </button>
+//                           )}
+//                           </div>
+//                       ))}
+//                     </div>
+//                   </form>
+//                 </div>
+//                   {quesList.length - 1 === index && quesList.length < 10 && (
+//                     <button type="button" onClick={handleAddQues}>
+//                       Add Question
+//                     </button>
+//                   )}
+//               </>
+//               ))}
+//           </div>
+//         </div>
+//       </div>
+//     </>
+//   );
+// };
+
+// export default CreateQuiz;
+
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import QuizStyles from "../styles/CreateQuiz.module.css";
-import quizImage from "../assets/quizImg/quiz create.png";
-import axios from "axios";
 
 const CreateQuiz = () => {
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   axios
-  //   .get("https://localhost:3002/")
-  //   .then((res) => console.log(res))
-  //   .catch((err) => console.log(err));
-   
-  
-  // }, [])
-  
-  
 
   const [values, setValues] = useState({
     name: "",
     category: "",
     level: "",
     privacy: "",
+    allowedUser: "",
+    passPercent: "",
   });
+
   const [submitted, setSubmitted] = useState(false);
   const [valid, setValid] = useState(false);
+  const [quesList, setQuesList] = useState([{ question: "", options: [{ option: "" }] }]);
+
+  const handleAddQues = () => {
+    setQuesList([...quesList, { question: "", options: [{ option: "" }] }]);
+  };
+
+  const handleRemoveQues = (index) => {
+    const qList = [...quesList];
+    qList.splice(index, 1);
+    setQuesList(qList);
+  };
+
+  const handleOptionChange = (e, qIndex, oIndex) => {
+    const { value } = e.target;
+    const updatedQuesList = [...quesList];
+    updatedQuesList[qIndex].options[oIndex].option = value;
+    setQuesList(updatedQuesList);
+  };
+
+  const handleAddOption = (qIndex) => {
+    const updatedQuesList = [...quesList];
+    if (updatedQuesList[qIndex].options.length < 4) {
+      updatedQuesList[qIndex].options.push({ option: "" });
+      setQuesList(updatedQuesList);
+    }
+  };
+
+  const handleRemoveOption = (qIndex, oIndex) => {
+    const updatedQuesList = [...quesList];
+    updatedQuesList[qIndex].options.splice(oIndex, 1);
+    setQuesList(updatedQuesList);
+  };
 
   const handleInputChange = (event) => {
-    
     const { name, value } = event.target;
     setValues((prevValues) => ({
       ...prevValues,
       [name]: value,
     }));
   };
+
+  const handleQuestionChange = (e, index) => {
+    const { value } = e.target;
+    const updatedQuesList = [...quesList];
+    updatedQuesList[index].question = value;
+    setQuesList(updatedQuesList);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    const isValid = values.email && values.password && setValid(isValid);
     setSubmitted(true);
 
-    if (isValid) {
-      // Optional: Navigate if form is valid
-      navigate("/create-quiz");
+    // Validate form fields
+    if (
+      values.name &&
+      values.category &&
+      values.level &&
+      values.privacy &&
+      values.allowedUser &&
+      values.passPercent
+    ) {
+      setValid(true);
+      // Proceed with the logic, like navigating or showing questions
+      // navigate("/create-quiz"); // Optional navigation
+    } else {
+      setValid(false);
     }
   };
 
@@ -51,151 +360,184 @@ const CreateQuiz = () => {
         <h1 className={QuizStyles.heading}>Create Quiz</h1>
 
         <div className={QuizStyles.pageContent}>
-          <div className={QuizStyles.imageContainer}>
-            <img src={quizImage} width={400} height={400} alt="Quiz" />
+          <div className={QuizStyles.pageHeader}>
+            <div className={QuizStyles.formCard}>
+              <form className={QuizStyles.quizForm} onSubmit={handleSubmit}>
+                <label htmlFor="name">Quiz Name: </label>
+                <input
+                  className={QuizStyles.formField}
+                  type="text"
+                  placeholder="Enter quiz name"
+                  name="name"
+                  required
+                  value={values.name}
+                  onChange={handleInputChange}
+                />
+                {submitted && !values.name && (
+                  <span id="name-error">Please enter quiz name</span>
+                )}
+
+                <label htmlFor="category">Category: </label>
+                <select
+                  name="category"
+                  value={values.category}
+                  onChange={handleInputChange}
+                >
+                  <option value="">Choose Option</option>
+                  <option value="option1">Exam</option>
+                  <option value="option2">Test</option>
+                  <option value="option3">Difficult</option>
+                </select>
+                {submitted && !values.category && (
+                  <span id="category-error">Please enter quiz category</span>
+                )}
+
+                <label htmlFor="level">Level: </label>
+                <select
+                  name="level"
+                  value={values.level}
+                  onChange={handleInputChange}
+                >
+                  <option value="">Choose Option</option>
+                  <option value="option1">Easy</option>
+                  <option value="option2">Medium</option>
+                  <option value="option3">Difficult</option>
+                </select>
+                {submitted && !values.level && (
+                  <span id="level-error">Enter quiz level:</span>
+                )}
+
+                <label htmlFor="privacy">Privacy: </label>
+                <select
+                  name="privacy"
+                  value={values.privacy}
+                  onChange={handleInputChange}
+                >
+                  <option value="">Choose Option</option>
+                  <option value="private">Private</option>
+                  <option value="public">Public</option>
+                </select>
+                {submitted && !values.privacy && (
+                  <span id="privacy-error">Enter quiz privacy:</span>
+                )}
+
+                <label htmlFor="passPercent">Passing Percentage: </label>
+                <input
+                  className={QuizStyles.formField}
+                  type="text"
+                  placeholder="Enter your passing percentage"
+                  name="passPercent"
+                  required
+                  value={values.passPercent}
+                  onChange={handleInputChange}
+                />
+                {submitted && !values.passPercent && (
+                  <span id="passPercent-error">
+                    Enter the passing percentage:
+                  </span>
+                )}
+
+                <label htmlFor="allowedUser">Number of Allowed Users: </label>
+                <input
+                  className={QuizStyles.formField}
+                  type="text"
+                  placeholder="Enter number of allowed users"
+                  name="allowedUser"
+                  required
+                  value={values.allowedUser}
+                  onChange={handleInputChange}
+                />
+                {submitted && !values.allowedUser && (
+                  <span id="allowedUser-error">
+                    Enter the number of allowed users:
+                  </span>
+                )}
+
+                <button type="submit" className={QuizStyles.btn}>
+                  Create
+                </button>
+              </form>
+            </div>
+
+            {/* Render quesList only if form is valid */}
+            {valid &&
+              quesList.map((q, index) => (
+                <div key={index} className={QuizStyles.questionCard}>
+                  <form>
+                    <div className={QuizStyles.questionaire}>
+                      <div className={QuizStyles.inputField}>
+                        <div>
+                          <label>Question. {index + 1}</label>
+                        </div>
+
+                        <div>
+                          <input
+                            type="text"
+                            className={QuizStyles.quesField}
+                            placeholder="Write your question here"
+                            name="question"
+                            required
+                            value={q.question}
+                            onChange={(e) => handleQuestionChange(e, index)}
+                          />
+                        </div>
+                      </div>
+                      {/* Render Options */}
+                      {q.options.map((opt, oIndex) => (
+                        <div key={oIndex} className={QuizStyles.options}>
+                          <input
+                            className={QuizStyles.options}
+                            type="text"
+                            placeholder={`Option ${oIndex + 1}`}
+                            name="option"
+                            value={opt.option}
+                            onChange={(e) => handleOptionChange(e, index, oIndex)}
+                          />
+                          {q.options.length !== 1 && (
+                            <button
+                              type="button"
+                              className={QuizStyles.rmvBtn}
+                              onClick={() => handleRemoveOption(index, oIndex)}
+                            >
+                              Remove
+                            </button>
+                          )}
+                        </div>
+                      ))}
+                      {q.options.length < 4 && (
+                        <button
+                          type="button"
+                          className={QuizStyles.addBtn}
+                          onClick={() => handleAddOption(index)}
+                        >
+                          Add Option
+                        </button>
+                      )}
+                    </div>
+                  </form>
+
+                  <button
+                    type="button"
+                    className={QuizStyles.rmvQuesBtn}
+                    onClick={() => handleRemoveQues(index)}
+                  >
+                    Delete
+                  </button>
+                </div>
+              ))}
+              <div className={QuizStyles.addQdiv}>
+            {quesList.length < 10 && (
+              <button type="button"
+              className={QuizStyles.addQue} onClick={handleAddQues}>
+                Add Question
+              </button>
+            )}
+            </div>
+            <button type="button" className={QuizStyles.btnCreate}>Create Quiz</button>
           </div>
-          <div className={QuizStyles.formCard}>
-            <form className={QuizStyles.quizForm} onSubmit={handleSubmit}>
-              <label htmlFor="name">Quiz Name: </label>
-              <input
-                className={QuizStyles.formField}
-                type="text"
-                placeholder="Enter quiz name"
-                name="name"
-                value={values.name}
-                onChange={handleInputChange}
-              />
-              {submitted && !values.email && (
-                <span id="name-error">Please enter quiz name</span>
-              )}
-
-              <label htmlFor="name">Category: </label>
-             
-              {/* <input
-                className={QuizStyles.formField}
-                type="text"
-                placeholder="Quiz category"
-                name="category"
-                value={values.category}
-                onChange={handleInputChange}
-              /> */}
-              {submitted && !values.email && (
-                <span id="name-error">Please enter quiz category</span>
-              )}
-
-              <label htmlFor="name">Level: </label>
-              <select  value={values.level} onChange={handleInputChange}>
-             
-             <option  value="option1">Easy</option>
-             <option  value="option2">Medium</option>
-             <option  value="option3">Difficult</option>
-         </select>
-              {/* <input
-                className={QuizStyles.formField}
-                type="text"
-                placeholder="Quiz category"
-                name="level"
-                value={values.level}
-                onChange={handleInputChange}
-              /> */}
-              {submitted && !values.email && (
-                <span id="name-error">Enter quiz level:</span>
-              )}
-
-              <label htmlFor="name">Privacy: </label>
-              <input
-                className={QuizStyles.formField}
-                type="text"
-                placeholder="Quiz category"
-                name="privacy"
-                value={values.privacy}
-                onChange={handleInputChange}
-              />
-              {submitted && !values.email && (
-                <span id="name-error">Enter quiz privacy:</span>
-              )}
-              <button className={QuizStyles.btn}>Create</button>
-            </form>
-          </div>
-
-         
+          
         </div>
-        <div className={QuizStyles.questionCard}>
-            <form>
-              <div className={QuizStyles.questionaire}>
-                <div className={QuizStyles.inputField}>
-                  <div>
-                <label>Ques: 1</label>
-                </div>
-                {/* <input
-                  className={QuizStyles.formField}
-                  type="number"
-                  placeholder="00"
-                  name="number"
-                  value={values.number}
-                  onChange={handleInputChange}
-                /> */}
-                <div>
-                 {/* <label>Question:</label> */}
-                <input
-                  className={QuizStyles.quesField}
-                  type="text"
-                  placeholder="Write your question here"
-                  name="text"
-                  value={values.name}
-                  onChange={handleInputChange}
-                />
-                </div>
-              
-
-              </div>
-
-              <div className={QuizStyles.optionRowOne}>
-               
-                <label>1.</label>
-                <input
-                  className={QuizStyles.formField}
-                  type="text"
-                  placeholder="option 1"
-                  name="text"
-                  value={values.name}
-                  onChange={handleInputChange}
-                />
-                <label>2.</label>
-                <input
-                  className={QuizStyles.formField}
-                  type="text"
-                  placeholder="option 2"
-                  name="text"
-                  value={values.name}
-                  onChange={handleInputChange}
-                />
-                </div>
-
-                <div className={QuizStyles.optionRowOne}>
-                <label>3.</label>
-                <input
-                  className={QuizStyles.formField}
-                  type="text"
-                  placeholder="option 3"
-                  name="text"
-                  value={values.name}
-                  onChange={handleInputChange}
-                />
-                <label>4.</label>
-                <input
-                  className={QuizStyles.formField}
-                  type="text"
-                  placeholder="option 4"
-                  name="text"
-                  value={values.name}
-                  onChange={handleInputChange}
-                />
-                </div>
-              </div>
-            </form>
-          </div>
-
+       
       </div>
     </>
   );
