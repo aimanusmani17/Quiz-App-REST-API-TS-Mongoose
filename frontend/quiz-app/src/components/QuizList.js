@@ -1,8 +1,13 @@
-import React from 'react'
+import React from 'react';
+import QuizListStyle from "../styles/QuizList.module.css";
+import Navbar from "../components/Navbar"
 
 const QuizList = () => {
   return (
-    <div>QuizList</div>
+    <>
+    <Navbar />
+    <div className={QuizListStyle.main}>QuizList</div>
+    </>
   )
 }
 

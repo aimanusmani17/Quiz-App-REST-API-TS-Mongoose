@@ -1,8 +1,16 @@
 import React from 'react'
+import ReportStyles from "../styles/Reports.module.css";
+import Navbar from "../components/Navbar"
 
 const Reports = () => {
   return (
-    <div>Reports</div>
+   <>
+   <Navbar />
+   <div className={ReportStyles.main}>report page
+
+   </div>
+   
+   </>
   )
 }
 

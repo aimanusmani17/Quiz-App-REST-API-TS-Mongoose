@@ -7,14 +7,21 @@ import axios from "axios";
 const Login = () => {
   const navigate = useNavigate();
 
-  // useEffect(() => {
-  //   axios
-  //   .get("https://localhost:3002/")
-  //   .then((res) => console.log(res))
-  //   .catch((err) => console.log(err));
-   
-  
-  // }, [])
+  const data = {
+    name: values.name,
+    email: values.email,
+    password: values.password
+  }
+
+  axios
+  .post("http://localhost:3002/auth/login", data)
+  .then((res) => {
+    console.log(res.data.data.token);
+    navigate("/home");
+  })
+  .catch((err) => console.log(err));
+
+
   const [values, setValues] = useState({
     email: "",
     password: "",
@@ -40,7 +47,7 @@ const Login = () => {
       // Optional: Navigate if form is valid
       navigate("/create-quiz");
     }
-  };
+  }
 
   return (
     <>
@@ -89,7 +96,8 @@ const Login = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+
+}
 
 export default Login;

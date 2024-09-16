@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import HomeStyles from "../../styles/Home.module.scss";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Navbar from "../../components/Navbar";
 
 const HomeCard = (props) => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const HomeCard = (props) => {
 
   return (
     <>
+    
       <div className={HomeStyles.cards}>
         <h1 className={HomeStyles.headingTwo}>{props.title}</h1>
         <p className="text-center">{props.description}</p>

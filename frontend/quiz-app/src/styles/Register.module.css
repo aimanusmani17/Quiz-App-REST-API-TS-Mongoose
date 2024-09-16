@@ -74,3 +74,17 @@
 .Regbutton:hover {
   background-color: #2980b9; /* Darker shade on hover */
 }
+
+.errorMessage {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: -10px;
+  margin-bottom: 10px;
+}
+
+.successMessage {
+  color: green;
+  margin-bottom: 20px;
+  font-size: 1rem;
+  text-align: center;
+}
